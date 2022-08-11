@@ -15,7 +15,7 @@ class Solution {
                 if(q.peek().right != null) q.add(q.peek().right);
                 sublist.add(q.poll().val);
             }
-            wraplist.add(sublist);
+            wraplist.addAll(sublist);
         }
         return wraplist;
     }
