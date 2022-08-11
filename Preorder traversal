@@ -1,0 +1,39 @@
+Preorder - (Root, Left, Right)
+
+A) Recursive approach
+
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        ArrayList<Integer> preorder = new ArrayList<>();
+        helper(root, preorder);
+        return preorder;
+    }
+    public void helper(TreeNode root, ArrayList<Integer> preorder){
+        if(root == null) return;
+        
+        preorder.add(root.val);
+        helper(root.left, preorder);
+        helper(root.right, preorder);
+    }
+}
+
+B) Iterative approach
+
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        ArrayList<Integer> preorder = new ArrayList<>();
+        if(root == null) return preorder;
+        
+        Stack<TreeNode> s = new Stack<>();
+        s.push(root);
+        
+        while(!s.isEmpty()){
+            root = s.pop();
+            preorder.add(root.val);
+            
+            if(root.right != null) s.add(root.right);
+            if(root.left != null) s.add(root.left);
+        }
+        return preorder;
+    }
+}
