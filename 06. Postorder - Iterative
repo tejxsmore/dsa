@@ -1,23 +1,4 @@
-Postorder - (Left, Right, Root)
-
-A) Recursive approach
-
-class Solution {
-    public List<Integer> postorderTraversal(TreeNode root) {
-        ArrayList<Integer> post = new ArrayList<>();
-        helper(root, post);
-        return post;
-    }
-    public void helper(TreeNode root, ArrayList<Integer> post){
-        if(root == null) return;
-        
-        helper(root.left, post);
-        helper(root.right, post);
-        post.add(root.val);
-    }
-}
-
-B) Iterative approach using 2 stack
+// Using two stacks
 
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
@@ -35,6 +16,7 @@ class Solution {
             if(root.left != null) s1.push(root.left);
             if(root.right != null) s1.push(root.right);
         }
+        
         while(!s2.isEmpty()){
             post.add(s2.pop().val);
         }
