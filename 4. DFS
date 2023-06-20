@@ -1,0 +1,19 @@
+class Solution{
+    public:
+    void func(int node, int vis[], vector<int>& dfs, vector<int> adj[]){
+        vis[node] = 1;
+        dfs.push_back(node);
+        
+        for(auto it : adj[node]){
+            if(!vis[it]){
+                func(it, vis, dfs, adj);
+            }
+        }
+    }
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        vector<int> dfs;
+        int vis[V] = {0};
+        func(0, vis, dfs, adj);
+        return dfs;
+    }
+};

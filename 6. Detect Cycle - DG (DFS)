@@ -1,0 +1,76 @@
+// Approach 1 - Using two arrays (vist, pathVisit)
+
+class Solution{
+    private:
+    bool dfsCheck(int node, vector<int> adj[], int vis[], int pis[]){
+        vis[node] = 1;
+        pis[node] = 1;
+        
+        for(auto it: adj[node]){
+            // when the node is not visited
+            if(!vis[it]){
+                if(dfsCheck(it, adj, vis, pis) == true) return true;
+            }
+            // If the node has been previously visited
+            // But it has to be visited on the same path
+            else if(pis[it]){
+                return true;
+            }
+        }
+        
+        pis[node] = 0;
+        return false;
+    }
+    public:
+    bool isCyclic(int V, vector<int> adj[]) {
+        int vis[V] = {0};
+        int pis[V] = {0};
+        
+        for(int i = 0; i < V; i++){
+            if(!vis[i]){
+                if(dfsCheck(i, adj, vis, pis) == true) return true;
+            }
+        }
+        
+        return false;
+    }
+};
+
+// Approach 2 - Using single Visit array
+// vis[i] = 0 // Not visited
+// vis[i] = 1 // Visited but not path visited
+// vis[i] = 2 // Visited and path visited
+
+class Solution{
+    private:
+    bool dfsCheck(int node, vector<int> adj[], int vis[]){
+        vis[node] = 2;
+        
+        for(auto it: adj[node]){
+            // when the node is not visited
+            if(!vis[it]){
+                if(dfsCheck(it, adj, vis) == true) return true;
+            }
+            // If the node has been previously visited
+            // But it has to be visited on the same path
+            else if(vis[it] == 2){
+                return true;
+            }
+        }
+        
+        vis[node] = 1;
+        return false;
+    }
+    public:
+    bool isCyclic(int V, vector<int> adj[]) {
+        int vis[V] = {0};
+        
+        for(int i = 0; i < V; i++){
+            if(!vis[i]){
+                if(dfsCheck(i, adj, vis) == true) return true;
+            }
+        }
+        
+        return false;
+    }
+};
