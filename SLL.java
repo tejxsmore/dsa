@@ -1,4 +1,4 @@
-public class SLL {
+class SLL {
     Node head;
 
     static class Node {
@@ -13,24 +13,20 @@ public class SLL {
 
     void addFirst(int val) {
         Node newNode = new Node(val);
-
         if (head == null) {
             head = newNode;
             return;
         }
-
         newNode.next = head;
         head = newNode;
     }
 
     void addLast(int val) {
         Node newNode = new Node(val);
-
         if (head == null) {
             head = newNode;
             return;
         }
-
         Node curr = head;
         while (curr.next != null) {
             curr = curr.next;
@@ -40,18 +36,15 @@ public class SLL {
 
     void addAny(int val, int pos) {
         Node newNode = new Node(val);
-
         if (head == null) {
             head = newNode;
             return;
         }
-
         if (pos == 1) {
             newNode.next = head;
             head = newNode;
             return;
         }
-
         Node prev = null;
         Node curr = head;
         while (pos > 1) {
@@ -87,11 +80,6 @@ public class SLL {
         if (head == null)
             return;
 
-        if (pos == 1) {
-            head = head.next;
-            return;
-        }
-
         Node prev = null;
         Node curr = head;
         while (pos > 1) {
@@ -102,7 +90,7 @@ public class SLL {
         prev.next = curr.next;
     }
 
-    Node reverseIT(Node head) {
+    Node reverseIt(Node head) {
         if (head == null || head.next == null)
             return head;
 
@@ -118,28 +106,23 @@ public class SLL {
         return prev;
     }
 
-    Node reverseRE(Node head) {
+    Node reverseRe(Node head) {
         if (head == null || head.next == null)
             return head;
 
-        Node newHead = reverseRE(head.next);
+        Node newHead = reverseRe(head.next);
         head.next.next = head;
         head.next = null;
         return newHead;
     }
 
     int getSize() {
-        if (head == null)
-            return 0;
-
+        int count = 0;
         Node curr = head;
-        int count = 1;
-
-        while (curr.next != null) {
+        while (curr != null) {
             curr = curr.next;
             count++;
         }
-
         return count;
     }
 
@@ -176,18 +159,17 @@ public class SLL {
         list.deleteLast();
         list.print();
 
-        list.deleteAny(2);
-        list.deleteAny(3);
+        list.deleteAny(4);
         list.print();
 
-        System.out.println("Reverse Iteratively");
-        list.head = list.reverseIT(list.head);
+        System.out.print("Reverse Iteratively : ");
+        list.head = list.reverseIt(list.head);
         list.print();
 
-        System.out.println("Reverse Recursively");
-        list.head = list.reverseRE(list.head);
+        System.out.print("Reverse Recursively : ");
+        list.head = list.reverseRe(list.head);
         list.print();
 
-        System.out.println("Size : " + list.getSize());
+        System.out.println("Get Size : " + list.getSize());
     }
 }
