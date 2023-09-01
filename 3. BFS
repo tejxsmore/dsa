@@ -1,3 +1,5 @@
+C++
+
 class Solution{
     vector<int> bfsOfGraph(int V, vector<int> adj[]) {
           vector<int> bfs;
@@ -23,3 +25,33 @@ class Solution{
           return bfs;
     }
 };
+
+JAVA -
+
+class Solution {
+    
+    public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(0);
+        
+        boolean vis[] = new boolean[V];
+        vis[0] = true;
+        
+        while(!q.isEmpty()){
+            int node = q.poll();
+            list.add(node);
+            
+            for(Integer it : adj.get(node)){
+                if(vis[it] == false){
+                    vis[it] = true;
+                    q.offer(it);
+                }
+            }
+        }
+        
+        return list;
+    }
+}
