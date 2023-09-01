@@ -1,5 +1,13 @@
+C++
+
 class Solution{
     public:
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        vector<int> dfs;
+        int vis[V] = {0};
+        func(0, vis, dfs, adj);
+        return dfs;
+    }
     void func(int node, int vis[], vector<int>& dfs, vector<int> adj[]){
         vis[node] = 1;
         dfs.push_back(node);
@@ -10,10 +18,25 @@ class Solution{
             }
         }
     }
-    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
-        vector<int> dfs;
-        int vis[V] = {0};
-        func(0, vis, dfs, adj);
-        return dfs;
-    }
 };
+
+JAVA
+
+class Solution {
+    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        ArrayList<Integer> list = new ArrayList<>();
+        boolean vis[] = new boolean[V];
+        helper(0, vis, list, adj);
+        return list;
+    }
+    public void helper(int start, boolean vis[], ArrayList<Integer> list, ArrayList<ArrayList<Integer>> adj){
+        vis[start] = true;
+        list.add(start);
+        
+        for(Integer it : adj.get(start)){
+            if(vis[it] == false){
+                helper(it, vis, list, adj);
+            }
+        }
+    }
+}
