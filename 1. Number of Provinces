@@ -1,3 +1,5 @@
+C++
+
 class Solution{
     public:
     void dfs(int node, int vis[], vector<int> adjLs[]){
@@ -35,5 +37,48 @@ class Solution{
         }
         
         return count;
+    }
+};
+
+JAVA
+
+
+class Solution {
+    static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
+        ArrayList<ArrayList<Integer>> adjLs = new ArrayList<ArrayList<Integer>>();
+        for(int i = 0; i<V; i++){
+            adjLs.add(new ArrayList<Integer>());
+        }
+        
+        
+        // Change ADJ MTRX to ADJ LIST
+        for(int i = 0; i<V; i++){
+            for(int j = 0; j<V; j++){
+                if(adj.get(i).get(j) == 1 && i != j){
+                    adjLs.get(i).add(j);
+                    adjLs.get(j).add(i);
+                }
+            }
+        }
+        
+        int count = 0;
+        boolean vis[] = new boolean[V];
+        
+        for(int i = 0; i<V; i++){
+            if(vis[i] == false){
+                count++;
+                dfs(i, vis, adjLs);
+            }
+        }
+        return count;
+    }
+    static void dfs(int start, boolean vis[], ArrayList<ArrayList<Integer>> adj){
+        vis[start] = true;
+        
+        for(Integer it : adj.get(start)){
+            if(vis[it] == false){
+                dfs(it, vis, adj);
+            }
+        }
     }
 };
