@@ -1,7 +1,6 @@
-// BREADTH FIRST SEARCH
-
 C++
 
+// BREADTH FIRST SEARCH
 class Solution{
     private:
     bool detectCycle(int src, int vis[], vector<int> adj[]){
@@ -69,6 +68,7 @@ class Solution{
 
 JAVA
 
+// BREADTH FIRST SEARCH 
 class Pair{
     int first;
     int second;
@@ -109,6 +109,35 @@ class Solution {
                 }else if(it != parent) return true;
             }
         }
+        return false;
+    }
+}
+
+// DEPTH FIRST SEARCH
+class Solution {
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+        boolean vis[] = new boolean[V];
+        for(int i = 0; i<V; i++) vis[i] = false;
+        
+        for(int i = 0; i<V; i++){
+            if(vis[i] == false){
+                if(detectCycle(i, -1, vis, adj) == true) return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean detectCycle(int node, int parent, boolean vis[],  ArrayList<ArrayList<Integer>> adj){
+        vis[node] = true;
+        
+        for(Integer it : adj.get(node)){
+            if(vis[it] == false){
+                if(detectCycle(it, node, vis, adj) == true) return true;
+            }
+            else if(it != parent) return true;
+        }
+        
         return false;
     }
 }
